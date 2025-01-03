@@ -1,16 +1,13 @@
 # sorting_algorithm_visualize
 
-Trying to visualize sorting algorithm
+Trying to visualize sorting algorithm with flutter
 
-## Getting Started
+## Sorting Algorithm Available
 
-This project is a starting point for a Flutter application.
+- [Bubble Sort](https://www.geeksforgeeks.org/bubble-sort-algorithm/)
+- [Insertion Sort](https://www.geeksforgeeks.org/insertion-sort-algorithm/)
+- [Quick Sort](https://www.geeksforgeeks.org/selection-sort-algorithm-2/)
+- [Selection Sort](https://www.geeksforgeeks.org/quick-sort-algorithm/)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This project inspired by
+[Sound of Sorting](https://panthema.net/2013/sound-of-sorting/) and you can watch it in Youtube.
