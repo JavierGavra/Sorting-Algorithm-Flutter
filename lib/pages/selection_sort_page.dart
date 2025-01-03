@@ -26,10 +26,10 @@ class _SelectionSortPageState extends State<SelectionSortPage> {
       array[0].status = ListItemStatus.correctPosition;
     });
 
-    int compareDelay = Config.checkIsSortedTime~/array.length;
+    int compareDelay = (Config.checkIsSortedTime~/array.length)~/2;
     for (int i = 1; i < array.length; i++) {
       setState(() => array[i].status = ListItemStatus.selected);
-      await Future.delayed(Duration(milliseconds: compareDelay));
+      await Future.delayed(Duration(microseconds: compareDelay));
 
       if (array[i - 1].number > array[i].number) {
         setState(() => status = "Not Sorted");
@@ -38,7 +38,7 @@ class _SelectionSortPageState extends State<SelectionSortPage> {
       }
 
       setState(() => array[i].status = ListItemStatus.correctPosition);
-      await Future.delayed(Duration(milliseconds: compareDelay));
+      await Future.delayed(Duration(microseconds: compareDelay));
     }
 
     ListUtils.backToNormal(array);
