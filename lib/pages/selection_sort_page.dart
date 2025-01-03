@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sorting_algorithm_visualize/config/config.dart';
 import 'package:sorting_algorithm_visualize/model/list_model.dart';
 import 'package:sorting_algorithm_visualize/model/list_utils.dart';
 
@@ -14,8 +15,6 @@ class SelectionSortPage extends StatefulWidget {
 
 class _SelectionSortPageState extends State<SelectionSortPage> {
   List<ListItemModel> array = [];
-
-  final List<int> delayList = [500000, 100000, 50000, 10000, 5000, 3500, 2000, 1500, 1000, 750, 500, 250, 100];
   int delay = 500;
   String status = "Ready";
 
@@ -26,9 +25,11 @@ class _SelectionSortPageState extends State<SelectionSortPage> {
       status = "Checking...";
       array[0].status = ListItemStatus.correctPosition;
     });
+
+    int compareDelay = Config.checkIsSortedTime~/array.length;
     for (int i = 1; i < array.length; i++) {
       setState(() => array[i].status = ListItemStatus.selected);
-      await Future.delayed(const Duration(milliseconds: 10));
+      await Future.delayed(Duration(milliseconds: compareDelay));
 
       if (array[i - 1].number > array[i].number) {
         setState(() => status = "Not Sorted");
@@ -37,7 +38,7 @@ class _SelectionSortPageState extends State<SelectionSortPage> {
       }
 
       setState(() => array[i].status = ListItemStatus.correctPosition);
-      await Future.delayed(const Duration(milliseconds: 10));
+      await Future.delayed(Duration(milliseconds: compareDelay));
     }
 
     ListUtils.backToNormal(array);
@@ -112,7 +113,7 @@ class _SelectionSortPageState extends State<SelectionSortPage> {
                         icon: const Icon(Icons.timelapse_outlined),
                         underline: Container(height: 2, color: color.primary),
                         onChanged: (int? value) => setState(() => delay = value!),
-                        items: delayList.map<DropdownMenuItem<int>>((int value) {
+                        items: Config.delayList.map<DropdownMenuItem<int>>((int value) {
                           return DropdownMenuItem<int>(
                             value: value,
                             child: Text("${value/1000} ms"),

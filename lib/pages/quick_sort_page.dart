@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sorting_algorithm_visualize/config/config.dart';
 import 'package:sorting_algorithm_visualize/model/list_model.dart';
 import 'package:sorting_algorithm_visualize/model/list_utils.dart';
 
@@ -14,8 +15,6 @@ class QuickSortPage extends StatefulWidget {
 
 class _QuickSortPageState extends State<QuickSortPage> {
   List<ListItemModel> array = [];
-
-  final List<int> delayList = [500000, 100000, 50000, 10000, 5000, 3500, 2000, 1500, 1000, 750, 500, 250, 100];
   int delay = 500;
   String status = "Ready";
 
@@ -26,9 +25,11 @@ class _QuickSortPageState extends State<QuickSortPage> {
       status = "Checking...";
       array[0].status = ListItemStatus.correctPosition;
     });
+
+    int compareDelay = (Config.checkIsSortedTime~/array.length)~/2;
     for (int i = 1; i < array.length; i++) {
       setState(() => array[i].status = ListItemStatus.selected);
-      await Future.delayed(const Duration(milliseconds: 10));
+      await Future.delayed(Duration(microseconds: compareDelay));
 
       if (array[i - 1].number > array[i].number) {
         setState(() => status = "Not Sorted");
@@ -37,7 +38,7 @@ class _QuickSortPageState extends State<QuickSortPage> {
       }
 
       setState(() => array[i].status = ListItemStatus.correctPosition);
-      await Future.delayed(const Duration(milliseconds: 10));
+      await Future.delayed(Duration(microseconds: compareDelay));
     }
 
     ListUtils.backToNormal(array);
@@ -114,7 +115,7 @@ class _QuickSortPageState extends State<QuickSortPage> {
                         icon: const Icon(Icons.timelapse_outlined),
                         underline: Container(height: 2, color: color.primary),
                         onChanged: (int? value) => setState(() => delay = value!),
-                        items: delayList.map<DropdownMenuItem<int>>((int value) {
+                        items: Config.delayList.map<DropdownMenuItem<int>>((int value) {
                           return DropdownMenuItem<int>(
                             value: value,
                             child: Text("${value/1000} ms"),
