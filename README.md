@@ -1,4 +1,4 @@
-# sorting_algorithm_visualize
+# Sorting Algorithm Visualize
 
 Trying to visualize sorting algorithm with flutter
 
